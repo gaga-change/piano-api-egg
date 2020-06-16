@@ -1,4 +1,4 @@
-import {initHour} from "../tools/dateTools";
+import {initHour} from "./tools/dateTools";
 
 export let startTimeAndEndTimeSchema: { startTime: { type: DateConstructor; required: boolean; validate: { validator: (val: any) => (boolean); message: string } }; endTime: { type: DateConstructor; required: boolean; validate: { validator: (val: any) => (boolean); message: string } } };
 startTimeAndEndTimeSchema = {
@@ -13,7 +13,7 @@ startTimeAndEndTimeSchema = {
   }, // 开始时间
   endTime: {
     type: Date, required: true, validate: {
-      validator: function (val: any) {
+      validator: function (this: {startTime: any, endTime: any}, val: any) {
         if (!(this.startTime instanceof Date) || !(this.endTime instanceof Date)) return true
         return initHour(this.startTime).getTime() === initHour(this.endTime).getTime()
           && this.startTime <= this.endTime

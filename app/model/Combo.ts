@@ -14,5 +14,5 @@ export default (): Model<ComboDocument> => {
     discriminatorKey: 'kind'
   })
 
-  return Dict.discriminator<ComboDocument>('Combo', schema, COMBO_DB_NAME)
+  return Dict().discriminator<ComboDocument>('Combo', schema, COMBO_DB_NAME)
 };

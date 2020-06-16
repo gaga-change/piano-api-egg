@@ -5,7 +5,7 @@ import * as mongoose from "mongoose";
 import {findIdRemovedConfig} from "../tools/aggregateConfig";
 import {PersonDocument} from "./Person";
 import {PERSON_DB_NAME} from "../config/dbName";
-import {initStartTimeAndEndTimeSchema, startTimeAndEndTimeSchema} from "./startTimeAndEndTimeSchema";
+import {initStartTimeAndEndTimeSchema, startTimeAndEndTimeSchema} from "../startTimeAndEndTimeSchema";
 
 export interface SpaceRuleDocument extends  Document {
   setWeek(week: number):SpaceRuleDocument;
@@ -19,11 +19,10 @@ interface SpaceRuleModel extends Model<SpaceRuleDocument>{
   findByWeek(week: number):Promise<Array<SpaceRuleDocument>>
   removeNoTeacherOrStudent():Promise<void>
   findByTimeArea(startTime: Date, endTime: Date, personKind: string): Promise<Array<SpaceRuleDocument>>
-
 }
 
 
-export default (): Model<any> => {
+export default (): Model<SpaceRuleDocument> => {
 
   const schema = new Schema({
     ...startTimeAndEndTimeSchema,

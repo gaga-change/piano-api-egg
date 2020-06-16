@@ -1,28 +1,31 @@
-// 清单
 
-import mongoose, {Schema, Document} from 'mongoose';
-import {SchemaTimestampsDocument} from "../type/other";
+import { Document, Model, Schema } from 'mongoose';
+import * as mongoose from "mongoose";
+import { SchemaTimestampsDocument } from '../../typings';
 
 interface log {
   time: Date
 }
 
- export interface WxCacheTokenDocument extends  Document, SchemaTimestampsDocument{
+export interface WxCacheTokenDocument extends  Document, SchemaTimestampsDocument{
   type: string
   token: string
   log: Array<log>
 }
 
-const schema = new Schema({
-  type: { type: String },
-  token: { type: String },
-  log: [
-    {
-      time: { type: Date },
-    },
-  ]
-}, {
-  timestamps: true,
-})
+export default (): Model<WxCacheTokenDocument> => {
 
-export  default  mongoose.model<WxCacheTokenDocument>('WxCacheToken', schema, 'piano_wx_cache_token');
+  const schema = new Schema({
+    type: { type: String },
+    token: { type: String },
+    log: [
+      {
+        time: { type: Date },
+      },
+    ]
+  }, {
+    timestamps: true,
+  })
+
+  return mongoose.model<WxCacheTokenDocument>('WxCacheToken', schema, 'piano_wx_cache_token');
+};

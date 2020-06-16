@@ -4,12 +4,11 @@ import {initHour} from "../tools/dateTools";
 import {TeacherDocument} from "./Teacher";
 import {StudentDocument} from "./Student";
 import {findByActivateArea, FindByActivateAreaOptions} from "../tools/aggregateConfig";
-import {initStartTimeAndEndTimeSchema, startTimeAndEndTimeSchema} from "./startTimeAndEndTimeSchema";
+import {initStartTimeAndEndTimeSchema, startTimeAndEndTimeSchema} from "../startTimeAndEndTimeSchema";
 import {COURSE_PERSON_STATUS_MAP, COURSE_STATUS_MAP} from "../config/enums";
-import {ClassTimeDocument} from "./ClassTime";
+import ClassTime, {ClassTimeDocument} from "./ClassTime";
 import {ClassTypeDocument} from "./ClassType";
 import {OrderDocument} from "./Order";
-import { Application } from 'egg';
 
 
 export interface CourseDocument extends Document {
@@ -34,8 +33,7 @@ interface CourseModel extends Model<CourseDocument> {
   checkTimeArea(startTime: Date | string | number, endTime: Date | string | number, classTime: any): Promise<boolean>
 }
 
-export default (app: Application): CourseModel => {
-  const {ClassTime} = app.model
+export default (): CourseModel => {
   const schema = new Schema({
     ...startTimeAndEndTimeSchema,
     teacher: {type: Schema.Types.ObjectId, ref: 'Teacher'},
@@ -103,7 +101,7 @@ export default (app: Application): CourseModel => {
      * @param classTime
      */
     async checkTimeArea(this: Model<CourseDocument>, startTime: Date | string | number, endTime: Date | string | number, classTime: any): Promise<boolean> {
-      const ct = await ClassTime.findById(classTime)
+      const ct = await ClassTime().findById(classTime)
       if (!ct) {
         return false
       } else {

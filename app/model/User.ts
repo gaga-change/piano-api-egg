@@ -1,17 +1,20 @@
 
-import mongoose , {Schema, Document}from 'mongoose'
-
+import { Document, Model, Schema } from 'mongoose';
+import * as mongoose from "mongoose";
 export interface UserDocument extends Document{
   username: string
   password: string
 }
 
-const schema = new Schema({
-  username: { type: String, },
-  password: { type: String, },
+export default (): Model<UserDocument> => {
 
-},{
-  timestamps: true,
-})
+  const schema = new Schema({
+    username: { type: String, },
+    password: { type: String, },
 
-export default mongoose.model<UserDocument>('User', schema, 'piano_user');
+  },{
+    timestamps: true,
+  })
+
+  return mongoose.model<UserDocument>('User', schema, 'piano_user');
+};

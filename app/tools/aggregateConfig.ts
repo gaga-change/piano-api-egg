@@ -7,7 +7,8 @@ import {Document, Model} from "mongoose";
 import {STUDENT_DB_NAME, TEACHER_DB_NAME} from "../config/dbName";
 import ThrowError from "./ThrowError";
 import {getActivityArea} from "./dateTools";
-import {StudentDocument, TeacherDocument} from "../models";
+import {TeacherDocument} from "../model/Teacher";
+import {StudentDocument} from "../model/Student";
 
 export const findIdRemovedConfig = (target: String, collectionName: String) => {
 
@@ -52,7 +53,7 @@ export const removeNoTeacherOrStudent = async (model: Model<Document>) => {
   for (let i = 0; i < teacherIds.length; i++) {
     const id = teacherIds[i]._id
     const res = await model.deleteMany({teacher: id})
-    docNum += res.deletedCount
+    docNum += (res.deletedCount || 0)
   }
   // 获取被删除的学生id
   const studentIds = await model.aggregate(findIdRemovedConfig('student', STUDENT_DB_NAME))
@@ -60,7 +61,7 @@ export const removeNoTeacherOrStudent = async (model: Model<Document>) => {
   for (let i = 0; i < studentIds.length; i++) {
     const id = studentIds[i]._id
     const res = await model.deleteMany({student: id})
-    docNum += res.deletedCount
+    docNum += (res.deletedCount || 0)
   }
   return {
     idNum,

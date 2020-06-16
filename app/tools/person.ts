@@ -1,6 +1,6 @@
-import {PersonDocument} from "../models/Person";
 import {TEACHER_DB_NAME} from "../config/dbName";
 import {FindByActivateAreaOptions} from "./aggregateConfig";
+import {PersonDocument} from "../model/Person";
 
 /**
  * 将person 转为指定的 teacher | student

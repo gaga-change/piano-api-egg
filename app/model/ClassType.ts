@@ -13,5 +13,5 @@ export default (): Model<ClassTypeDocument> => {
     timestamps: true,
     discriminatorKey: 'kind'
   })
-  return Dict.discriminator<ClassTypeDocument>('ClassType', schema, CLASS_TYPE_DB_NAME)
+  return Dict().discriminator<ClassTypeDocument>('ClassType', schema, CLASS_TYPE_DB_NAME)
 };
