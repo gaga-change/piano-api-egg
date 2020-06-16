@@ -1,8 +1,8 @@
 
 import { Model, Schema } from 'mongoose';
 
-import Person, {PersonDocument} from "./Person";
-import {STUDENT_DB_NAME} from "../config/dbName";
+import Person, { PersonDocument } from './Person';
+import { STUDENT_DB_NAME } from '../config/dbName';
 
 export interface StudentDocument extends PersonDocument{
 
@@ -10,14 +10,14 @@ export interface StudentDocument extends PersonDocument{
 
 export default (): Model<StudentDocument> => {
   const schema = new Schema({
-    instrument: [{type: Number, }], // 学习的乐器
-    instrumentStr: {type: String}, // 学习的乐器名称
-    studyAge: {type: Number}, // 学琴年限
-    age: {type: Number}, // 年龄
+    instrument: [{ type: Number }], // 学习的乐器
+    instrumentStr: { type: String }, // 学习的乐器名称
+    studyAge: { type: Number }, // 学琴年限
+    age: { type: Number }, // 年龄
   }, {
     timestamps: true,
-    discriminatorKey: 'kind'
-  })
+    discriminatorKey: 'kind',
+  });
 
   return Person().discriminator<StudentDocument>('Student', schema, STUDENT_DB_NAME);
 };

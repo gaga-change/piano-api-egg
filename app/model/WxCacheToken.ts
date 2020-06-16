@@ -1,16 +1,16 @@
 
 import { Document, Model, Schema } from 'mongoose';
-import * as mongoose from "mongoose";
+import * as mongoose from 'mongoose';
 import { SchemaTimestampsDocument } from '../../typings';
 
-interface log {
-  time: Date
+interface LogObj {
+  time: Date;
 }
 
-export interface WxCacheTokenDocument extends  Document, SchemaTimestampsDocument{
-  type: string
-  token: string
-  log: Array<log>
+export interface WxCacheTokenDocument extends Document, SchemaTimestampsDocument{
+  type: string;
+  token: string;
+  log: Array<LogObj>;
 }
 
 export default (): Model<WxCacheTokenDocument> => {
@@ -22,10 +22,10 @@ export default (): Model<WxCacheTokenDocument> => {
       {
         time: { type: Date },
       },
-    ]
+    ],
   }, {
     timestamps: true,
-  })
+  });
 
   return mongoose.model<WxCacheTokenDocument>('WxCacheToken', schema, 'piano_wx_cache_token');
 };

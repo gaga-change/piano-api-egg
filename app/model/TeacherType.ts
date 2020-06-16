@@ -1,7 +1,7 @@
 
 import { Model, Schema } from 'mongoose';
-import {TEACHER_TYPE_DB_NAME} from "../config/dbName";
-import Dict, {DictDocument} from "./Dict";
+import { TEACHER_TYPE_DB_NAME } from '../config/dbName';
+import Dict, { DictDocument } from './Dict';
 
 export interface TeacherTypeDocument extends DictDocument {
 }
@@ -11,8 +11,8 @@ export default (): Model<TeacherTypeDocument> => {
 
   }, {
     timestamps: true,
-    discriminatorKey: 'kind'
-  })
+    discriminatorKey: 'kind',
+  });
 
-  return Dict().discriminator<TeacherTypeDocument>('TeacherType', schema, TEACHER_TYPE_DB_NAME)
+  return Dict().discriminator<TeacherTypeDocument>('TeacherType', schema, TEACHER_TYPE_DB_NAME);
 };
