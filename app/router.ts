@@ -36,4 +36,7 @@ export default (app: Application) => {
   router.get('/api/teacherTypes/:id', controller.dict.teacherTypeController.show);
   router.get('/api/teacherTypes', controller.dict.teacherTypeController.index);
 
+  router.get('/api/persons', controller.personController.index);
+  router.get('/api/persons/:id', controller.personController.show);
+
 };

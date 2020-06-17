@@ -15,13 +15,13 @@ export interface PersonDocument extends Document {
 }
 
 const schema = new Schema({
-  name: { type: String, default: '', trim: true }, // 名称
+  name: { type: String, default: '', trim: true, maxlength: 100 }, // 名称
   status: { type: Number, default: 0, enum: [ ...PERSON_STATUS_MAP.keys() ] }, // 状态
-  phone: { type: String }, // 手机号码
-  openid: { type: String }, // wx openId
-  remark: { type: String, default: '', trim: true }, // 备注
-  qrcodeTeacherTicket: { type: String },
-  qrcodeStudentTicket: { type: String },
+  phone: { type: String, maxlength: 100 }, // 手机号码
+  openid: { type: String, maxlength: 200 }, // wx openId
+  remark: { type: String, default: '', trim: true, maxlength: 500 }, // 备注
+  qrcodeTeacherTicket: { type: String, maxlength: 500 },
+  qrcodeStudentTicket: { type: String, maxlength: 500 },
 }, {
   timestamps: true,
   discriminatorKey: 'kind',

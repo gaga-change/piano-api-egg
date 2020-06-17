@@ -1,6 +1,7 @@
 import { Controller } from 'egg';
 import { Model } from 'mongoose';
 import code from './config/code';
+import { pageable } from './tools/pageable';
 
 interface BaseControllerrOptions {
   defaultSort?: any;
@@ -9,8 +10,8 @@ interface BaseControllerrOptions {
 
 export default class BaseController extends Controller {
   public Model: Model<any>;
-  private defaultSort: any;
-  private duplicateKey: any;
+  public defaultSort: any;
+  public duplicateKey: any;
 
   constructor(modelName: string, options: BaseControllerrOptions, args) {
     super(args);
@@ -57,20 +58,11 @@ export default class BaseController extends Controller {
   async index() {
     const { ctx } = this;
     const query = ctx.query;
-    const pageSize = Number(ctx.query.pageSize) || 20;
-    const page = Number(ctx.query.pageNum) || 1;
-    const params = { ...query };
-    delete params.pageSize;
-    delete params.pageNum;
-    Object.keys(params).forEach(key => {
-      if (this.Model.schema.obj[key] && this.Model.schema.obj[key].type === String) {
-        params[key] = new RegExp(params[key], 'i');
-      }
-    });
+    const { skip, limit, params } = pageable(query, this.Model);
     const res1 = this.Model.find(params)
       .sort(this.defaultSort)
-      .limit(pageSize)
-      .skip((page - 1) * pageSize);
+      .limit(limit)
+      .skip(skip);
     const res2 = this.Model.countDocuments(params);
     ctx.body = {
       total: await res2,

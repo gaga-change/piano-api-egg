@@ -4,6 +4,7 @@
 import 'egg';
 import ExportAuthController from '../../../app/controller/authController';
 import ExportHome from '../../../app/controller/home';
+import ExportPersonController from '../../../app/controller/PersonController';
 import ExportDictClassTimeController from '../../../app/controller/dict/ClassTimeController';
 import ExportDictClassTypeController from '../../../app/controller/dict/ClassTypeController';
 import ExportDictComboController from '../../../app/controller/dict/ComboController';
@@ -14,6 +15,7 @@ declare module 'egg' {
   interface IController {
     authController: ExportAuthController;
     home: ExportHome;
+    personController: ExportPersonController;
     dict: {
       classTimeController: ExportDictClassTimeController;
       classTypeController: ExportDictClassTypeController;
