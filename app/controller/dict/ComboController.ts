@@ -1,12 +1,9 @@
 import BaseController from '../../BaseController';
 
-export default class ClassTimeController extends BaseController {
+export default class ComboController extends BaseController {
 
   constructor(args) {
-    super('ClassTime', {
-      duplicateKey: {
-        time: '时间',
-      },
+    super('Combo', {
       defaultSort: { disabled: 1, createdAt: -1 },
     }, args);
   }

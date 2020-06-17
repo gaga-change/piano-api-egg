@@ -1,12 +1,9 @@
 import BaseController from '../../BaseController';
 
-export default class ClassTimeController extends BaseController {
+export default class ClassTypeController extends BaseController {
 
   constructor(args) {
-    super('ClassTime', {
-      duplicateKey: {
-        time: '时间',
-      },
+    super('ClassType', {
       defaultSort: { disabled: 1, createdAt: -1 },
     }, args);
   }
