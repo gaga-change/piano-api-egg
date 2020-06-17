@@ -3,21 +3,27 @@ import { Model } from 'mongoose';
 import code from './config/code';
 import { pageable } from './tools/pageable';
 
-interface BaseControllerrOptions {
+interface BaseControllerOptions {
   defaultSort?: any;
   duplicateKey?: any;
+  indexPopulate?: Array<any>;
+  showPopulate?: Array<any>;
 }
 
 export default class BaseController extends Controller {
   public Model: Model<any>;
   public defaultSort: any;
   public duplicateKey: any;
+  public indexPopulate?: Array<any>;
+  public showPopulate?: Array<any>;
 
-  constructor(modelName: string, options: BaseControllerrOptions, args) {
+  constructor(modelName: string, options: BaseControllerOptions, args) {
     super(args);
     this.Model = this.ctx.model[modelName];
     this.defaultSort = options.defaultSort || { createdAt: -1 };
     this.duplicateKey = options.duplicateKey;
+    this.indexPopulate = options.indexPopulate;
+    this.showPopulate = options.showPopulate;
   }
 
   async create() {
@@ -50,7 +56,11 @@ export default class BaseController extends Controller {
   async show() {
     const { ctx } = this;
     const { id } = ctx.params;
-    const model = await this.Model.findById(id);
+    const search = this.Model.findById(id);
+    if (this.showPopulate) {
+      this.showPopulate.forEach(v => search.populate(v));
+    }
+    const model = await search;
     ctx.assert(model, code.BadRequest, '数据已被删除！');
     ctx.body = model;
   }
@@ -63,6 +73,9 @@ export default class BaseController extends Controller {
       .sort(this.defaultSort)
       .limit(limit)
       .skip(skip);
+    if (this.indexPopulate) {
+      this.indexPopulate.forEach(v => res1.populate(v));
+    }
     const res2 = this.Model.countDocuments(params);
     ctx.body = {
       total: await res2,

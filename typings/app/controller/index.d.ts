@@ -5,6 +5,8 @@ import 'egg';
 import ExportAuthController from '../../../app/controller/authController';
 import ExportHome from '../../../app/controller/home';
 import ExportPersonController from '../../../app/controller/PersonController';
+import ExportStudentController from '../../../app/controller/StudentController';
+import ExportTeacherController from '../../../app/controller/TeacherController';
 import ExportDictClassTimeController from '../../../app/controller/dict/ClassTimeController';
 import ExportDictClassTypeController from '../../../app/controller/dict/ClassTypeController';
 import ExportDictComboController from '../../../app/controller/dict/ComboController';
@@ -16,6 +18,8 @@ declare module 'egg' {
     authController: ExportAuthController;
     home: ExportHome;
     personController: ExportPersonController;
+    studentController: ExportStudentController;
+    teacherController: ExportTeacherController;
     dict: {
       classTimeController: ExportDictClassTimeController;
       classTypeController: ExportDictClassTypeController;
