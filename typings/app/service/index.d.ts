@@ -10,8 +10,9 @@ import ExportAuthService from '../../../app/service/AuthService';
 import ExportClassTimeService from '../../../app/service/ClassTimeService';
 import ExportPersonService from '../../../app/service/PersonService';
 import ExportStudentService from '../../../app/service/StudentService';
+import ExportTeacherService from '../../../app/service/TeacherService';
 import ExportWxTokenService from '../../../app/service/WxTokenService';
-import ExportWxPushMsg from '../../../app/service/wx/pushMsg';
+import ExportWxPushMsg from '../../../app/service/wx/PushMsg';
 
 declare module 'egg' {
   interface IService {
@@ -19,6 +20,7 @@ declare module 'egg' {
     classTimeService: AutoInstanceType<typeof ExportClassTimeService>;
     personService: AutoInstanceType<typeof ExportPersonService>;
     studentService: AutoInstanceType<typeof ExportStudentService>;
+    teacherService: AutoInstanceType<typeof ExportTeacherService>;
     wxTokenService: AutoInstanceType<typeof ExportWxTokenService>;
     wx: {
       pushMsg: AutoInstanceType<typeof ExportWxPushMsg>;

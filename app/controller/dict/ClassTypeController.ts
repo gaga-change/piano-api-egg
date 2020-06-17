@@ -1,4 +1,4 @@
-import BaseController from '../../BaseController';
+import BaseController from '../../code/BaseController';
 
 export default class ClassTypeController extends BaseController {
 

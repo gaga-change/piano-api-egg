@@ -1,11 +1,10 @@
-import BaseController from '../BaseController';
+import BaseController from '../code/BaseController';
 
 export default class StudentController extends BaseController {
 
   constructor(args) {
     super('Student', {
       defaultSort: { createdAt: -1 },
-      indexPopulate: [],
     }, args);
   }
 
