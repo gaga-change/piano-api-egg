@@ -7,7 +7,7 @@ export interface ClassTimeDocument extends DictDocument {
   time: number;
 }
 const schema = new Schema({
-  time: { type: Number, required: true },
+  time: { type: Number, required: true, unique: true },
 }, {
   timestamps: true,
   discriminatorKey: 'kind',

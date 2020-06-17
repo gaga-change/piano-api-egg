@@ -12,6 +12,11 @@ function isCustomer(user: UserDocument) {
 }
 
 export default class AuthService extends Service {
+
+  /**
+   * 登录
+   * @param user 用户
+   */
   public async login(user: UserDocument): Promise<{ name: string; role?: string }> {
     const ctx = this.ctx;
     ctx.assert(isAdmin(user) || isCustomer(user), code.BadRequest, '用户名或密码错误！');

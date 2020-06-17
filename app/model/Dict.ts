@@ -10,9 +10,9 @@ export interface DictDocument extends Document {
 }
 
 const schema = new Schema({
-  name: { type: String, default: '', trim: true }, // 名称
+  name: { type: String, default: '', trim: true, maxlength: 100 }, // 名称
   disabled: { type: Boolean, default: false }, // 是否禁用
-  remark: { type: String, default: '', trim: true }, // 备注
+  remark: { type: String, default: '', trim: true, maxlength: 300 }, // 备注
 }, {
   timestamps: true,
   discriminatorKey: 'kind',

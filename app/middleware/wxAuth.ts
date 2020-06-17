@@ -3,7 +3,6 @@ import code from '../config/code';
 import { Context } from 'egg';
 import { PERSON_STATUS_PASS } from '../config/const';
 
-// 这里是你自定义的中间件
 export default function wxAuth(): any {
   return async (ctx: Context, next: () => Promise<any>) => {
     const openid = ctx.openid || undefined;

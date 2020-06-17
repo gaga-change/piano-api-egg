@@ -8,9 +8,9 @@
     "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-piano-api-egg",
+    "start": "egg-scripts start --port=8680 --title=egg-server-piano-api-egg",
     "stop": "egg-scripts stop --title=egg-server-piano-api-egg",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev --port=8680",
     "debug": "egg-bin debug",
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
