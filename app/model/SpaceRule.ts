@@ -22,7 +22,7 @@ interface SpaceRuleModel extends Model<SpaceRuleDocument>{
 }
 
 
-export default (): Model<SpaceRuleDocument> => {
+export default (): SpaceRuleModel => {
 
   const schema = new Schema({
     ...startTimeAndEndTimeSchema,

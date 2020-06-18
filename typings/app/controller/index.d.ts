@@ -2,9 +2,10 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportAuthController from '../../../app/controller/authController';
+import ExportAuthController from '../../../app/controller/AuthController';
 import ExportHome from '../../../app/controller/home';
 import ExportPersonController from '../../../app/controller/PersonController';
+import ExportSpaceRuleController from '../../../app/controller/SpaceRuleController';
 import ExportStudentController from '../../../app/controller/StudentController';
 import ExportTeacherController from '../../../app/controller/TeacherController';
 import ExportDictClassTimeController from '../../../app/controller/dict/ClassTimeController';
@@ -18,6 +19,7 @@ declare module 'egg' {
     authController: ExportAuthController;
     home: ExportHome;
     personController: ExportPersonController;
+    spaceRuleController: ExportSpaceRuleController;
     studentController: ExportStudentController;
     teacherController: ExportTeacherController;
     dict: {

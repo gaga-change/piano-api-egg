@@ -3,7 +3,7 @@ import { Application } from 'egg';
 export default (app: Application) => {
   const { controller, middleware, router } = app;
   const checkAuth = middleware.checkAuth();
-  // const mongoSession = middleware.mongoSession();
+  const mongoSession = middleware.mongoSession();
 
   router.get('/', controller.home.index);
 
@@ -44,4 +44,14 @@ export default (app: Application) => {
   router.get('/api/students/:id', controller.studentController.show);
   router.get('/api/students', controller.studentController.index);
 
+  router.post('/api/teachers', checkAuth, controller.teacherController.create);
+  router.put('/api/teachers/:id', checkAuth, controller.teacherController.update);
+  router.get('/api/teachers/:id', controller.teacherController.show);
+  router.get('/api/teachers', controller.teacherController.index);
+
+  router.post('/api/spaceRules/spaceRulesClearNoTeacherOrStudent', checkAuth, controller.spaceRuleController.clearDiscardDoc);
+  router.post('/api/spaceRules/spaceRulesUpdate', checkAuth, mongoSession, controller.spaceRuleController.spaceRulesUpdate);
+  router.get('/api/spaceRules/getSelfSpaceAreaInSpaceRule', controller.spaceRuleController.getSelfSpaceAreaInSpaceRule);
+  router.get('/api/spaceRules/getSpaceArea', controller.spaceRuleController.getSpaceArea);
+  router.get('/api/spaceRules', controller.spaceRuleController.index);
 };
