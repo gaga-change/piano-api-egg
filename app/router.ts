@@ -54,4 +54,7 @@ export default (app: Application) => {
   router.get('/api/spaceRules/getSelfSpaceAreaInSpaceRule', controller.spaceRuleController.getSelfSpaceAreaInSpaceRule);
   router.get('/api/spaceRules/getSpaceArea', controller.spaceRuleController.getSpaceArea);
   router.get('/api/spaceRules', controller.spaceRuleController.index);
+
+  router.get('/api/dashboard/readyDataNum', checkAuth, controller.dashboardController.readyDataNum);
+
 };

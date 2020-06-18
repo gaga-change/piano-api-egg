@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportAuthController from '../../../app/controller/AuthController';
+import ExportDashboardController from '../../../app/controller/DashboardController';
 import ExportHome from '../../../app/controller/home';
 import ExportPersonController from '../../../app/controller/PersonController';
 import ExportSpaceRuleController from '../../../app/controller/SpaceRuleController';
@@ -17,6 +18,7 @@ import ExportDictTeacherTypeController from '../../../app/controller/dict/Teache
 declare module 'egg' {
   interface IController {
     authController: ExportAuthController;
+    dashboardController: ExportDashboardController;
     home: ExportHome;
     personController: ExportPersonController;
     spaceRuleController: ExportSpaceRuleController;
