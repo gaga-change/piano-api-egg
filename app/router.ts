@@ -59,4 +59,6 @@ export default (app: Application) => {
 
   router.get('/api/enums/enumsTotal', checkAuth, controller.enumController.total);
 
+  router.get('/api/shares', checkAuth, controller.shareController.index);
+
 };

@@ -7,6 +7,7 @@ import ExportDashboardController from '../../../app/controller/DashboardControll
 import ExportEnumController from '../../../app/controller/EnumController';
 import ExportHome from '../../../app/controller/home';
 import ExportPersonController from '../../../app/controller/PersonController';
+import ExportShareController from '../../../app/controller/ShareController';
 import ExportSpaceRuleController from '../../../app/controller/SpaceRuleController';
 import ExportStudentController from '../../../app/controller/StudentController';
 import ExportTeacherController from '../../../app/controller/TeacherController';
@@ -23,6 +24,7 @@ declare module 'egg' {
     enumController: ExportEnumController;
     home: ExportHome;
     personController: ExportPersonController;
+    shareController: ExportShareController;
     spaceRuleController: ExportSpaceRuleController;
     studentController: ExportStudentController;
     teacherController: ExportTeacherController;
