@@ -3,7 +3,7 @@ import { Model, Document } from 'mongoose';
 import code from '../config/code';
 import { pageable } from '../tools/pageable';
 
-interface BaseControllerOptions {
+export interface BaseControllerOptions {
   defaultSort?: any;
   duplicateKey?: any; // 哪些至是不能重复的，且备注中文名
   indexPopulate?: Array<any>;

@@ -10,6 +10,7 @@ import ExportAuthService from '../../../app/service/AuthService';
 import ExportClassTimeService from '../../../app/service/ClassTimeService';
 import ExportDashboardService from '../../../app/service/DashboardService';
 import ExportEnumService from '../../../app/service/EnumService';
+import ExportOrderService from '../../../app/service/OrderService';
 import ExportPersonService from '../../../app/service/PersonService';
 import ExportShareService from '../../../app/service/ShareService';
 import ExportSpaceRuleService from '../../../app/service/SpaceRuleService';
@@ -24,6 +25,7 @@ declare module 'egg' {
     classTimeService: AutoInstanceType<typeof ExportClassTimeService>;
     dashboardService: AutoInstanceType<typeof ExportDashboardService>;
     enumService: AutoInstanceType<typeof ExportEnumService>;
+    orderService: AutoInstanceType<typeof ExportOrderService>;
     personService: AutoInstanceType<typeof ExportPersonService>;
     shareService: AutoInstanceType<typeof ExportShareService>;
     spaceRuleService: AutoInstanceType<typeof ExportSpaceRuleService>;

@@ -1,9 +1,9 @@
 import { Controller } from 'egg';
-import BaseService from './BaseService';
+import BaseService, { BaseControllerOptions } from './BaseService';
 
 export default class BaseController extends Controller {
-  private baseService: BaseService
-  constructor(modelName: string, options: any, args) {
+  public baseService: BaseService
+  constructor(modelName: string, options: BaseControllerOptions, args) {
     super(args);
     this.baseService = new BaseService(modelName, options, args);
   }
