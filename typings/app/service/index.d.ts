@@ -9,6 +9,7 @@ type AutoInstanceType<T, U = T extends CanExportFunc ? T : T extends AnyFunc ? R
 import ExportAuthService from '../../../app/service/AuthService';
 import ExportClassTimeService from '../../../app/service/ClassTimeService';
 import ExportDashboardService from '../../../app/service/DashboardService';
+import ExportEnumService from '../../../app/service/EnumService';
 import ExportPersonService from '../../../app/service/PersonService';
 import ExportSpaceRuleService from '../../../app/service/SpaceRuleService';
 import ExportStudentService from '../../../app/service/StudentService';
@@ -21,6 +22,7 @@ declare module 'egg' {
     authService: AutoInstanceType<typeof ExportAuthService>;
     classTimeService: AutoInstanceType<typeof ExportClassTimeService>;
     dashboardService: AutoInstanceType<typeof ExportDashboardService>;
+    enumService: AutoInstanceType<typeof ExportEnumService>;
     personService: AutoInstanceType<typeof ExportPersonService>;
     spaceRuleService: AutoInstanceType<typeof ExportSpaceRuleService>;
     studentService: AutoInstanceType<typeof ExportStudentService>;

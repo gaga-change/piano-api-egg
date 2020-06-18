@@ -57,4 +57,6 @@ export default (app: Application) => {
 
   router.get('/api/dashboard/readyDataNum', checkAuth, controller.dashboardController.readyDataNum);
 
+  router.get('/api/enums/enumsTotal', checkAuth, controller.enumController.total);
+
 };

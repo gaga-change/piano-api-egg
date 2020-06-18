@@ -4,6 +4,7 @@
 import 'egg';
 import ExportAuthController from '../../../app/controller/AuthController';
 import ExportDashboardController from '../../../app/controller/DashboardController';
+import ExportEnumController from '../../../app/controller/EnumController';
 import ExportHome from '../../../app/controller/home';
 import ExportPersonController from '../../../app/controller/PersonController';
 import ExportSpaceRuleController from '../../../app/controller/SpaceRuleController';
@@ -19,6 +20,7 @@ declare module 'egg' {
   interface IController {
     authController: ExportAuthController;
     dashboardController: ExportDashboardController;
+    enumController: ExportEnumController;
     home: ExportHome;
     personController: ExportPersonController;
     spaceRuleController: ExportSpaceRuleController;
