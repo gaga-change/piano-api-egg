@@ -39,7 +39,7 @@ export default class BaseService<T extends Document> extends Service {
     return this.Model.findByIdAndRemove(id, { session });
   }
 
-  async update(id: string, body: any, oldDataCb?: (model: Document) => Promise<any>) {
+  async update(id: string, body: any, oldDataCb?: (model: T) => Promise<any>) {
     const { ctx } = this;
     const { session } = ctx.state;
 

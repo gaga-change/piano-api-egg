@@ -109,7 +109,7 @@ export default class CourseService extends BaseService<CourseDocument> {
       }
     }
 
-    await course.save({ session }); // 保存更新
+    return course.save({ session }); // 保存更新
   }
 
   /**

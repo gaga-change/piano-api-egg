@@ -11,6 +11,7 @@ import ExportClassTimeService from '../../../app/service/ClassTimeService';
 import ExportCourseService from '../../../app/service/CourseService';
 import ExportDashboardService from '../../../app/service/DashboardService';
 import ExportEnumService from '../../../app/service/EnumService';
+import ExportLeaveAreaService from '../../../app/service/LeaveAreaService';
 import ExportOrderService from '../../../app/service/OrderService';
 import ExportPersonService from '../../../app/service/PersonService';
 import ExportShareService from '../../../app/service/ShareService';
@@ -27,6 +28,7 @@ declare module 'egg' {
     courseService: AutoInstanceType<typeof ExportCourseService>;
     dashboardService: AutoInstanceType<typeof ExportDashboardService>;
     enumService: AutoInstanceType<typeof ExportEnumService>;
+    leaveAreaService: AutoInstanceType<typeof ExportLeaveAreaService>;
     orderService: AutoInstanceType<typeof ExportOrderService>;
     personService: AutoInstanceType<typeof ExportPersonService>;
     shareService: AutoInstanceType<typeof ExportShareService>;
