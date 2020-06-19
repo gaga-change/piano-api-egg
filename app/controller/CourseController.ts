@@ -72,7 +72,7 @@ export default class CourseController extends BaseController<CourseDocument> {
   /** 更新 */
   async update() {
     const { ctx } = this;
-    const id = ctx.params;
+    const { id } = ctx.params;
     const body = ctx.request.body;
     const course = await this.baseService.show(id, { populate: false });
     course.set(body);
