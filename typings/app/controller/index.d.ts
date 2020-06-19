@@ -20,6 +20,9 @@ import ExportDictClassTypeController from '../../../app/controller/dict/ClassTyp
 import ExportDictComboController from '../../../app/controller/dict/ComboController';
 import ExportDictProductController from '../../../app/controller/dict/ProductController';
 import ExportDictTeacherTypeController from '../../../app/controller/dict/TeacherTypeController';
+import ExportWxWxController from '../../../app/controller/wx/WxController';
+import ExportWxWxStudentController from '../../../app/controller/wx/WxStudentController';
+import ExportWxWxTeacherController from '../../../app/controller/wx/WxTeacherController';
 
 declare module 'egg' {
   interface IController {
@@ -42,6 +45,11 @@ declare module 'egg' {
       comboController: ExportDictComboController;
       productController: ExportDictProductController;
       teacherTypeController: ExportDictTeacherTypeController;
+    }
+    wx: {
+      wxController: ExportWxWxController;
+      wxStudentController: ExportWxWxStudentController;
+      wxTeacherController: ExportWxWxTeacherController;
     }
   }
 }

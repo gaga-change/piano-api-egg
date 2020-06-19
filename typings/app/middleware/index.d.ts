@@ -5,11 +5,13 @@ import 'egg';
 import ExportCheckAuth from '../../../app/middleware/checkAuth';
 import ExportMongoSession from '../../../app/middleware/mongoSession';
 import ExportWxAuth from '../../../app/middleware/wxAuth';
+import ExportWxCheckOpenid from '../../../app/middleware/wxCheckOpenid';
 
 declare module 'egg' {
   interface IMiddleware {
     checkAuth: typeof ExportCheckAuth;
     mongoSession: typeof ExportMongoSession;
     wxAuth: typeof ExportWxAuth;
+    wxCheckOpenid: typeof ExportWxCheckOpenid;
   }
 }

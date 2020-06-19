@@ -4,6 +4,8 @@ export default (app: Application) => {
   const { controller, middleware, router } = app;
   const checkAuth = middleware.checkAuth();
   const mongoSession = middleware.mongoSession();
+  const wxAuth = middleware.wxAuth();
+  const wxCheckOpenid = middleware.wxCheckOpenid();
 
   router.get('/', controller.home.index);
 
@@ -84,4 +86,20 @@ export default (app: Application) => {
   router.put('/api/takeCourses/:id', checkAuth, mongoSession, controller.takeCourseController.update);
   router.get('/api/takeCourses/:id', controller.takeCourseController.show);
   router.get('/api/takeCourses', controller.takeCourseController.index);
+
+  router.get('/api/wx/getReadyCourses', wxAuth, controller.wx.wxController.getReadyCourses);
+  router.get('/api/wx/createMenu', controller.wx.wxController.createMenu);
+  router.get('/api/wx/:type/tagsSync', checkAuth, controller.wx.wxController.wxTagSync);
+  router.get('/api/wx/login', controller.wx.wxController.wxLogin);
+  router.get('/api/wx/account', wxCheckOpenid, controller.wx.wxController.wxAccount);
+  router.get('/api/wx/server', controller.wx.wxController.wxServer);
+  router.post('/api/wx/server', controller.wx.wxController.wxPostServer);
+
+  router.post('/api/wx/student/register', wxCheckOpenid, controller.wx.wxStudentController.register);
+  router.get('/api/wx/student/selfCode', wxAuth, controller.wx.wxStudentController.getSelfQrcode);
+
+  router.post('/api/wx/teacher/takeCourse', wxAuth, mongoSession, controller.wx.wxTeacherController.takeCourse);
+  router.post('/api/wx/teacher/register', wxCheckOpenid, controller.wx.wxTeacherController.register);
+  router.get('/api/wx/teacher/selfCode', wxAuth, controller.wx.wxTeacherController.getSelfQrcode);
+
 };
