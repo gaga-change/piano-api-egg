@@ -6,8 +6,8 @@ import { ClassTimeDocument } from './ClassTime';
 
 
 export interface BonusRuleDocument extends Document {
-  teacherType: Schema.Types.ObjectId | TeacherTypeDocument | string;
-  classTime: Schema.Types.ObjectId | ClassTimeDocument | string;
+  teacherType: TeacherTypeDocument | string | null;
+  classTime: ClassTimeDocument | string | null;
   price: number;
   disabled: boolean;
   remark: string;

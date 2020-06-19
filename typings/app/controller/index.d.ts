@@ -13,6 +13,7 @@ import ExportPersonController from '../../../app/controller/PersonController';
 import ExportShareController from '../../../app/controller/ShareController';
 import ExportSpaceRuleController from '../../../app/controller/SpaceRuleController';
 import ExportStudentController from '../../../app/controller/StudentController';
+import ExportTakeCourseController from '../../../app/controller/TakeCourseController';
 import ExportTeacherController from '../../../app/controller/TeacherController';
 import ExportDictClassTimeController from '../../../app/controller/dict/ClassTimeController';
 import ExportDictClassTypeController from '../../../app/controller/dict/ClassTypeController';
@@ -33,6 +34,7 @@ declare module 'egg' {
     shareController: ExportShareController;
     spaceRuleController: ExportSpaceRuleController;
     studentController: ExportStudentController;
+    takeCourseController: ExportTakeCourseController;
     teacherController: ExportTeacherController;
     dict: {
       classTimeController: ExportDictClassTimeController;

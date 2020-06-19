@@ -14,14 +14,14 @@ import { OrderDocument } from './Order';
 export interface CourseDocument extends Document {
   startTime: Date;
   endTime: Date;
-  teacher?: Schema.Types.ObjectId | TeacherDocument | string;
-  student?: Schema.Types.ObjectId | StudentDocument | string;
+  teacher?: TeacherDocument | string | null;
+  student?: StudentDocument | string | null;
   teacherStatus: number;
   studentStatus: number;
   status: number;
-  classType: Schema.Types.ObjectId | ClassTypeDocument | string;
-  classTime: Schema.Types.ObjectId | ClassTimeDocument | string;
-  order?: Schema.Types.ObjectId | OrderDocument | string;
+  classType: ClassTypeDocument | string | null;
+  classTime: ClassTimeDocument | string | null;
+  order?: OrderDocument | string | null;
   remark?: string;
 }
 

@@ -4,6 +4,7 @@ import { TEACHER_DB_NAME } from '../config/dbName';
 import { COURSE_STATUS_NO_PASS, COURSE_STATUS_READY } from '../config/const';
 import { CourseDocument } from '../model/Course';
 import { STUDENT_TYPE, TEACHER_TYPE } from '../tools/wxTools';
+import { getId } from '../tools/getID';
 
 export default class CourseService extends BaseService<CourseDocument> {
   constructor(ctx) {
@@ -90,14 +91,14 @@ export default class CourseService extends BaseService<CourseDocument> {
     let course;
     if (id) {
       course = await this.show(id, { populate: false });
-      const classTime = await service.classTimeService.show(course.classTime as string);
+      const classTime = await service.classTimeService.show(getId(course.classTime));
       // 还原订单
-      course.order && await ctx.service.orderService.updateTime(course.order as string, classTime.time);
+      course.order && await ctx.service.orderService.updateTime(getId(course.order), classTime.time);
       course.set(body);
     } else {
       course = new Course(body);
     }
-    const classTime = await service.classTimeService.show(course.classTime as string);
+    const classTime = await service.classTimeService.show(getId(course.classTime));
     const endTime = new Date(new Date(course.startTime).getTime() + classTime.time * 60 * 1000);
     course.set({ endTime });
     if (course.status !== COURSE_STATUS_NO_PASS) { // 不是取消的课程
@@ -105,7 +106,7 @@ export default class CourseService extends BaseService<CourseDocument> {
       await this.checkCourseDuplicate(course);
       if (course.order) {
         // 减少订单时间
-        await ctx.service.orderService.updateTime(course.order as string, -classTime.time);
+        await ctx.service.orderService.updateTime(getId(course.order), -classTime.time);
       }
     }
 
@@ -131,8 +132,8 @@ export default class CourseService extends BaseService<CourseDocument> {
     const isTeacher = type === TEACHER_TYPE;
     const { Course } = this.app.model;
     return await Course.findByTimeArea(course.startTime, course.endTime,
-      isTeacher ? course.teacher as string : undefined,
-      isTeacher ? undefined : course.student as string,
+      isTeacher ? getId(course.teacher) : undefined,
+      isTeacher ? undefined : getId(course.student),
       {
         _id: { $ne: course._id },
         status: COURSE_STATUS_READY,

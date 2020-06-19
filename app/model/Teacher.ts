@@ -8,7 +8,7 @@ export interface TeacherDocument extends PersonDocument {
   school?: string;
   major?: string;
   grade?: number;
-  type?: Schema.Types.ObjectId | ClassTimeDocument | string;
+  type?: ClassTimeDocument | string | null;
 }
 
 export default (): Model<TeacherDocument> => {

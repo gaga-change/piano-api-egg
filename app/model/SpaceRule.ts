@@ -11,7 +11,7 @@ export interface SpaceRuleDocument extends Document {
   setWeek(week: number): SpaceRuleDocument;
   startTime: Date;
   endTime: Date;
-  person?: Schema.Types.ObjectId | PersonDocument | string;
+  person?: PersonDocument | string | null;
   remark?: string;
 }
 

@@ -8,9 +8,9 @@ import { PersonDocument } from './Person';
 
 
 export interface LeaveAreaDocument extends Document{
-  course: Schema.Types.ObjectId | CourseDocument | string;
-  person: Schema.Types.ObjectId | PersonDocument | string;
-  adverse: Schema.Types.ObjectId | PersonDocument | string;
+  course: CourseDocument | string | null;
+  person: PersonDocument | string | null;
+  adverse: PersonDocument | string | null;
   status: number;
   remark: string;
   reason: string;

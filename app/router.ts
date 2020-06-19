@@ -79,4 +79,9 @@ export default (app: Application) => {
   router.put('/api/leaveAreas/:id', checkAuth, mongoSession, controller.leaveAreaController.update);
   router.get('/api/leaveAreas/:id', controller.leaveAreaController.show);
   router.get('/api/leaveAreas', controller.leaveAreaController.index);
+
+  router.post('/api/takeCourses', checkAuth, mongoSession, controller.takeCourseController.create);
+  router.put('/api/takeCourses/:id', checkAuth, mongoSession, controller.takeCourseController.update);
+  router.get('/api/takeCourses/:id', controller.takeCourseController.show);
+  router.get('/api/takeCourses', controller.takeCourseController.index);
 };

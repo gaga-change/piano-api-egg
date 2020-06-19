@@ -17,6 +17,7 @@ import ExportPersonService from '../../../app/service/PersonService';
 import ExportShareService from '../../../app/service/ShareService';
 import ExportSpaceRuleService from '../../../app/service/SpaceRuleService';
 import ExportStudentService from '../../../app/service/StudentService';
+import ExportTakeCourseService from '../../../app/service/TakeCourseService';
 import ExportTeacherService from '../../../app/service/TeacherService';
 import ExportWxTokenService from '../../../app/service/WxTokenService';
 import ExportWxPushMsg from '../../../app/service/wx/PushMsg';
@@ -34,6 +35,7 @@ declare module 'egg' {
     shareService: AutoInstanceType<typeof ExportShareService>;
     spaceRuleService: AutoInstanceType<typeof ExportSpaceRuleService>;
     studentService: AutoInstanceType<typeof ExportStudentService>;
+    takeCourseService: AutoInstanceType<typeof ExportTakeCourseService>;
     teacherService: AutoInstanceType<typeof ExportTeacherService>;
     wxTokenService: AutoInstanceType<typeof ExportWxTokenService>;
     wx: {

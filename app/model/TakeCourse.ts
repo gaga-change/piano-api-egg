@@ -10,13 +10,13 @@ import * as mongoose from 'mongoose';
 
 export interface TakeCourseDocument extends Document {
   startTime: Date;
-  student: Schema.Types.ObjectId | StudentDocument | string;
-  teacher?: Schema.Types.ObjectId | TeacherDocument | string;
-  course?: Schema.Types.ObjectId | CourseDocument | string;
-  classType: Schema.Types.ObjectId | ClassTypeDocument | string;
-  classTime: Schema.Types.ObjectId | ClassTimeDocument | string;
-  order?: Schema.Types.ObjectId | OrderDocument | string;
-  teacherTypes: Array<Schema.Types.ObjectId>;
+  student: StudentDocument | string | null;
+  teacher?: TeacherDocument | string | null;
+  course?: CourseDocument | string | null;
+  classType: ClassTypeDocument | string | null;
+  classTime: ClassTimeDocument | string | null;
+  order?: OrderDocument | string | null;
+  teacherTypes: Array<string>;
   cancel: boolean;
   remark?: string;
 }

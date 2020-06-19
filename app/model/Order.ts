@@ -5,8 +5,8 @@ import { StudentDocument } from './Student';
 import { ProductDocument } from './Product';
 
 export interface OrderDocument extends Document {
-  product: Schema.Types.ObjectId | ProductDocument | string;
-  student: Schema.Types.ObjectId | StudentDocument | string;
+  product: ProductDocument | string | null;
+  student: StudentDocument | string | null;
   excessTime: number;
   cancel: boolean;
   remark: string;

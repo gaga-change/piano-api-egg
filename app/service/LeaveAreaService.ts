@@ -2,6 +2,7 @@ import BaseService from '../code/BaseService';
 import { LeaveAreaDocument } from '../model/LeaveArea';
 import { COURSE_PERSON_STATUS_LEAVE, COURSE_STATUS_NO_PASS, LEAVE_AREA_STATUS_PASS } from '../config/const';
 import { TEACHER_DB_NAME } from '../config/dbName';
+import { getId } from '../tools/getID';
 
 export default class LeaveAreaService extends BaseService<LeaveAreaDocument> {
   constructor(ctx) {
@@ -43,7 +44,7 @@ export default class LeaveAreaService extends BaseService<LeaveAreaDocument> {
     } else {
       update.studentStatus = COURSE_PERSON_STATUS_LEAVE;
     }
-    const course = await ctx.service.courseService.save(update, leaveArea.person as string);
+    const course = await ctx.service.courseService.save(update, getId(leaveArea.person));
     let adverse;
     if (person.kind === TEACHER_DB_NAME) { // 给请假赋上 另一个对象
       adverse = course.student;
