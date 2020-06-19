@@ -68,7 +68,7 @@ export default (app: Application) => {
 
   router.get('/api/shares', checkAuth, controller.shareController.index);
 
-  router.post('/api/orders/findByStudentAndNoComplete', checkAuth, controller.orderController.findByStudentAndNoComplete);
+  router.get('/api/orders/findByStudentAndNoComplete', checkAuth, controller.orderController.findByStudentAndNoComplete);
   router.post('/api/orders', checkAuth, controller.orderController.create);
   router.put('/api/orders/:id', checkAuth, controller.orderController.update);
   router.get('/api/orders/:id', controller.orderController.show);
