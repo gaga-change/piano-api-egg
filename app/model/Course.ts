@@ -14,15 +14,15 @@ import { OrderDocument } from './Order';
 export interface CourseDocument extends Document {
   startTime: Date;
   endTime: Date;
-  teacher?: TeacherDocument | string | null;
-  student?: StudentDocument | string | null;
+  teacher: TeacherDocument | string | null;
+  student: StudentDocument | string | null;
   teacherStatus: number;
   studentStatus: number;
   status: number;
   classType: ClassTypeDocument | string | null;
   classTime: ClassTimeDocument | string | null;
   order?: OrderDocument | string | null;
-  remark?: string;
+  remark: string;
 }
 
 interface CourseModel extends Model<CourseDocument> {
@@ -43,7 +43,7 @@ export default (): CourseModel => {
     status: { type: Number, default: 0, enum: [ ...COURSE_STATUS_MAP.keys() ] }, // 状态
     classType: { type: Schema.Types.ObjectId, ref: 'ClassType', required: true }, // 课类型
     classTime: { type: Schema.Types.ObjectId, ref: 'ClassTime', required: true }, // 课时长
-    order: { type: Schema.Types.ObjectId, ref: 'Order', required: true }, // 订单
+    order: { type: Schema.Types.ObjectId, ref: 'Order' }, // 订单
     remark: { type: String, default: '', trim: true }, // 备注
   }, {
     timestamps: true,

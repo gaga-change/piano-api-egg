@@ -16,7 +16,7 @@ export default class OrderController extends BaseController<OrderDocument> {
    */
   async findByStudentAndNoComplete() {
     const { ctx } = this;
-    const query = ctx.query || {};
+    const query = ctx.query;
     ctx.body = await ctx.service.orderService.findByStudentAndNoComplete(query);
   }
 
