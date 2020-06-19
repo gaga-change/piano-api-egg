@@ -28,6 +28,11 @@ export default (app: Application) => {
   router.get('/api/combos/:id', controller.dict.comboController.show);
   router.get('/api/combos', controller.dict.comboController.index);
 
+  router.post('/api/bonusRules', checkAuth, controller.bonusRuleController.create);
+  router.put('/api/bonusRules/:id', checkAuth, controller.bonusRuleController.update);
+  router.get('/api/bonusRules/:id', controller.bonusRuleController.show);
+  router.get('/api/bonusRules', controller.bonusRuleController.index);
+
   router.post('/api/products', checkAuth, controller.dict.productController.create);
   router.put('/api/products/:id', checkAuth, controller.dict.productController.update);
   router.get('/api/products/:id', controller.dict.productController.show);

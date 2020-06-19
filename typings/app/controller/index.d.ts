@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportAuthController from '../../../app/controller/AuthController';
+import ExportBonusRuleController from '../../../app/controller/BonusRuleController';
 import ExportCourseController from '../../../app/controller/CourseController';
 import ExportDashboardController from '../../../app/controller/DashboardController';
 import ExportEnumController from '../../../app/controller/EnumController';
@@ -27,6 +28,7 @@ import ExportWxWxTeacherController from '../../../app/controller/wx/WxTeacherCon
 declare module 'egg' {
   interface IController {
     authController: ExportAuthController;
+    bonusRuleController: ExportBonusRuleController;
     courseController: ExportCourseController;
     dashboardController: ExportDashboardController;
     enumController: ExportEnumController;
