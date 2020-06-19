@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import BaseController from '../code/BaseController';
+import { OrderDocument } from '../model/Order';
 
 
-export default class OrderController extends BaseController {
+export default class OrderController extends BaseController<OrderDocument> {
   constructor(ctx) {
     super('Order', {
       indexPopulate: [ 'product', 'student' ],

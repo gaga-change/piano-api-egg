@@ -1,21 +1,21 @@
 import { Service } from 'egg';
-import { Model, Document } from 'mongoose';
-import code from '../config/code';
+import { Model, Document, Schema } from 'mongoose';
 import { pageable } from '../tools/pageable';
+import ThrowError from '../tools/ThrowError';
 
-export interface BaseControllerOptions {
+export interface BaseControllerOptions{
   defaultSort?: any;
   duplicateKey?: any; // 哪些至是不能重复的，且备注中文名
   indexPopulate?: Array<any>;
   showPopulate?: Array<any>;
 }
 
-export default class BaseService extends Service {
-  public Model: Model<any>;
+export default class BaseService<T extends Document> extends Service {
+  public Model: Model<T>;
   public defaultSort: any;
   private readonly duplicateKey: any;
-  private readonly indexPopulate?: Array<any>;
-  private readonly showPopulate?: Array<any>;
+  public readonly indexPopulate?: Array<any>;
+  public readonly showPopulate?: Array<any>;
 
   constructor(modelName: string, options: BaseControllerOptions, args) {
     super(args);
@@ -28,36 +28,55 @@ export default class BaseService extends Service {
 
   async create(body: any) {
     const { ctx } = this;
+    const { session } = ctx.state;
     ctx.state.duplicateKey = this.duplicateKey;
     const model = new this.Model(body);
-    return await model.save();
+    return await model.save({ session });
   }
 
   async destroy(id: string) {
-    return this.Model.deleteOne({ _id: id });
+    const { session } = this.ctx.state;
+    return this.Model.findByIdAndRemove(id, { session });
   }
 
   async update(id: string, body: any, oldDataCb?: (model: Document) => Promise<any>) {
     const { ctx } = this;
+    const { session } = ctx.state;
+
     ctx.state.duplicateKey = this.duplicateKey;
     const model = await this.Model.findById(id);
-    ctx.assert(model, code.BadRequest, '数据已被删除！');
+    if (!model) throw new ThrowError('数据已被删除！');
     if (oldDataCb) {
       await oldDataCb(model);
     }
     model.set(body);
-    await model.save();
+    await model.save({ session });
     return model;
   }
 
-  async show(id: string) {
-    const { ctx } = this;
-    const search = this.Model.findById(id);
-    if (this.showPopulate) {
+  /**
+   * 查询
+   * @param id ID
+   * @param options 参数
+   */
+  public async show(id: Schema.Types.ObjectId | T | string | null, options: {populate: boolean} = { populate: true }): Promise<T> {
+    const { session } = this.ctx.state;
+    let getId;
+    if (id === null) {
+      new ThrowError('参数不能传Null！');
+    } else if (typeof id === 'string') {
+      getId = id;
+    } else if ('_id' in id) {
+      getId = id._id;
+    } else {
+      getId = id;
+    }
+    const search = this.Model.findById(getId, undefined, { session });
+    if (options.populate && this.showPopulate) {
       this.showPopulate.forEach(v => search.populate(v));
     }
     const model = await search;
-    ctx.assert(model, code.BadRequest, '数据已被删除！');
+    if (!model) throw new ThrowError('数据已被删除！');
     return model;
   }
 

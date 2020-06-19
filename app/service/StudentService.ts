@@ -1,8 +1,13 @@
-import { Service } from 'egg';
 import ThrowError from '../tools/ThrowError';
 import { PERSON_STATUS_PASS } from '../config/const';
+import BaseService from '../code/BaseService';
+import { StudentDocument } from '../model/Student';
 
-export default class StudentService extends Service {
+export default class StudentService extends BaseService<StudentDocument> {
+  constructor(ctx) {
+    super('Student', {}, ctx);
+  }
+
   public async update(id: string, body: any) {
     const { ctx } = this;
     const { Student } = ctx.model;
@@ -16,5 +21,6 @@ export default class StudentService extends Service {
       // 通知学生注册成功
       await ctx.service.wx.pushMsg.studentRegisterSuccess(body);
     }
+    return student;
   }
 }

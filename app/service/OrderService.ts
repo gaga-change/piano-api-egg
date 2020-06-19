@@ -2,7 +2,7 @@ import BaseService from '../code/BaseService';
 import ThrowError from '../tools/ThrowError';
 import { OrderDocument } from '../model/Order';
 
-export default class OrderService extends BaseService {
+export default class OrderService extends BaseService<OrderDocument> {
   constructor(ctx) {
     super('Order', {}, ctx);
   }
@@ -33,5 +33,22 @@ export default class OrderService extends BaseService {
     if (!product) throw new ThrowError('商品已被删除');
     order.excessTime = product && product.time; // 剩余时间 初始 等于商品的总时间
     return order.save();
+  }
+
+  /**
+   * 更新订单的时间
+   * @param orderId 订单id
+   * @param time 订单时间
+   */
+  public async updateTime(orderId: string, time: number): Promise<OrderDocument> {
+    const { Order } = this.app.model;
+    const { session } = this.ctx.state;
+    const order = await Order.findByIdAndUpdate(orderId, { $inc: { excessTime: time } }, {
+      new: true,
+      session,
+    });
+    if (!order) throw new ThrowError('订单不存在');
+    if (order.excessTime < 0) throw new ThrowError('订单剩余时间不足！');
+    return order;
   }
 }

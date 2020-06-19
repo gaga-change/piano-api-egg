@@ -1,6 +1,7 @@
 import BaseController from '../code/BaseController';
+import { ShareDocument } from '../model/Share';
 
-export default class ShareController extends BaseController {
+export default class ShareController extends BaseController<ShareDocument> {
 
   constructor(ctx) {
     super('Share', {}, ctx);

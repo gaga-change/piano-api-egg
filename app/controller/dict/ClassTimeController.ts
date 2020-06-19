@@ -1,6 +1,7 @@
 import BaseController from '../../code/BaseController';
+import { ClassTimeDocument } from '../../model/ClassTime';
 
-export default class ClassTimeController extends BaseController {
+export default class ClassTimeController extends BaseController<ClassTimeDocument> {
 
   constructor(args) {
     super('ClassTime', {

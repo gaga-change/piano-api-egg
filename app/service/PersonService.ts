@@ -1,7 +1,12 @@
-import { Service } from 'egg';
 import { pageable } from '../tools/pageable';
+import { PersonDocument } from '../model/Person';
+import BaseService from '../code/BaseService';
 
-export default class PersonService extends Service {
+export default class PersonService extends BaseService<PersonDocument> {
+
+  constructor(ctx) {
+    super('Person', {}, ctx);
+  }
 
   /**
    * 列表查询
@@ -26,5 +31,4 @@ export default class PersonService extends Service {
       list: await res1,
     };
   }
-
 }

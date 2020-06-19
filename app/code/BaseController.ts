@@ -1,8 +1,9 @@
 import { Controller } from 'egg';
+import { Document } from 'mongoose';
 import BaseService, { BaseControllerOptions } from './BaseService';
 
-export default class BaseController extends Controller {
-  public baseService: BaseService
+export default class BaseController<T extends Document> extends Controller {
+  public baseService: BaseService<T>
   constructor(modelName: string, options: BaseControllerOptions, args) {
     super(args);
     this.baseService = new BaseService(modelName, options, args);

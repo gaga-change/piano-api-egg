@@ -11,7 +11,7 @@ interface SpaceAreaDocument {
   endTime: Date;
 }
 
-export default class SpaceRuleService extends BaseService {
+export default class SpaceRuleService extends BaseService<SpaceRuleDocument> {
   constructor(ctx) {
     super('SpaceRule', {}, ctx);
   }

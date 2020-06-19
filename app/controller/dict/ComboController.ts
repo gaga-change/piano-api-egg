@@ -1,6 +1,7 @@
 import BaseController from '../../code/BaseController';
+import { ComboDocument } from '../../model/Combo';
 
-export default class ComboController extends BaseController {
+export default class ComboController extends BaseController<ComboDocument> {
 
   constructor(args) {
     super('Combo', {

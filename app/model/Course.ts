@@ -28,7 +28,7 @@ export interface CourseDocument extends Document {
 interface CourseModel extends Model<CourseDocument> {
   findByActivateArea(options: FindByActivateAreaOptions, appendQuery?: any): Promise<Array<CourseDocument>>;
 
-  findByTimeArea(startTime: Date | string | number, endTime: Date | string | number, teacher?: string, student?: string, appendQuery?: any): Promise<Array<CourseDocument>>;
+  findByTimeArea(startTime: Date | string | number, endTime: Date | string | number, teacher?: string, student?: string, appendQuery?: any, session?: any): Promise<Array<CourseDocument>>;
 
   checkTimeArea(startTime: Date | string | number, endTime: Date | string | number, classTime: any): Promise<boolean>;
 }
@@ -36,14 +36,14 @@ interface CourseModel extends Model<CourseDocument> {
 export default (): CourseModel => {
   const schema = new Schema({
     ...startTimeAndEndTimeSchema,
-    teacher: { type: Schema.Types.ObjectId, ref: 'Teacher' },
-    student: { type: Schema.Types.ObjectId, ref: 'Student' },
+    teacher: { type: Schema.Types.ObjectId, ref: 'Teacher', required: true },
+    student: { type: Schema.Types.ObjectId, ref: 'Student', required: true },
     teacherStatus: { type: Number, default: 0, enum: [ ...COURSE_PERSON_STATUS_MAP.keys() ] }, // 老师状态
     studentStatus: { type: Number, default: 0, enum: [ ...COURSE_PERSON_STATUS_MAP.keys() ] }, // 学生状态
     status: { type: Number, default: 0, enum: [ ...COURSE_STATUS_MAP.keys() ] }, // 状态
     classType: { type: Schema.Types.ObjectId, ref: 'ClassType', required: true }, // 课类型
     classTime: { type: Schema.Types.ObjectId, ref: 'ClassTime', required: true }, // 课时长
-    order: { type: Schema.Types.ObjectId, ref: 'Order' }, // 订单
+    order: { type: Schema.Types.ObjectId, ref: 'Order', required: true }, // 订单
     remark: { type: String, default: '', trim: true }, // 备注
   }, {
     timestamps: true,
@@ -79,8 +79,9 @@ export default (): CourseModel => {
      * @param teacher 老师
      * @param student 学生
      * @param appendQuery 附加查询条件
+     * @param session Session
      */
-    async findByTimeArea(this: Model<CourseDocument>, startTime: Date | string | number, endTime: Date | string | number, teacher?: string, student?: string, appendQuery: any = {}) {
+    async findByTimeArea(this: Model<CourseDocument>, startTime: Date | string | number, endTime: Date | string | number, teacher?: string, student?: string, appendQuery: any = {}, session?: any) {
       startTime = new Date(startTime);
       endTime = new Date(endTime);
       const params: { $or: any; teacher?: string; student?: string } = {
@@ -96,7 +97,7 @@ export default (): CourseModel => {
       if (student) {
         params.student = student;
       }
-      return this.find({ ...params, ...appendQuery });
+      return this.find({ ...params, ...appendQuery }, undefined, { session });
     },
 
     // eslint-disable-next-line jsdoc/check-param-names

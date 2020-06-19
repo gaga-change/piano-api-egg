@@ -1,7 +1,8 @@
 import BaseController from '../code/BaseController';
+import { SpaceRuleDocument } from '../model/SpaceRule';
 
 
-export default class SpaceRuleController extends BaseController {
+export default class SpaceRuleController extends BaseController<SpaceRuleDocument> {
 
   constructor(ctx) {
     super('SpaceRule', {}, ctx);

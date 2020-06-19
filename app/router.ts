@@ -66,4 +66,12 @@ export default (app: Application) => {
   router.put('/api/orders/:id', checkAuth, controller.orderController.update);
   router.get('/api/orders/:id', controller.orderController.show);
   router.get('/api/orders', controller.orderController.index);
+
+  router.get('/api/courses/findByPersonAndMonth', controller.courseController.findByPersonAndMonth);
+  router.get('/api/courses/coursesActivateArea', controller.courseController.coursesActivateArea);
+  router.get('/api/courses/findByPersonAndDay', controller.courseController.findByPersonAndDay);
+  router.post('/api/courses', checkAuth, mongoSession, controller.courseController.create);
+  router.put('/api/courses/:id', checkAuth, mongoSession, controller.courseController.update);
+  router.get('/api/courses/:id', controller.courseController.show);
+  router.get('/api/courses', controller.courseController.index);
 };

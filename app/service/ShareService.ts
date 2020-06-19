@@ -1,9 +1,10 @@
 import BaseService from '../code/BaseService';
 import { PERSON_DB_NAME } from '../config/dbName';
 import { pageable } from '../tools/pageable';
+import { ShareDocument } from '../model/Share';
 
 
-export default class ShareService extends BaseService {
+export default class ShareService extends BaseService<ShareDocument> {
   constructor(ctx) {
     super('Share', {}, ctx);
   }

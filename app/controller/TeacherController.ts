@@ -1,6 +1,7 @@
 import BaseController from '../code/BaseController';
+import { TeacherDocument } from '../model/Teacher';
 
-export default class TeacherController extends BaseController {
+export default class TeacherController extends BaseController<TeacherDocument> {
 
   constructor(args) {
     super('Teacher', {
