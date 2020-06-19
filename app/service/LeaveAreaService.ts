@@ -44,7 +44,7 @@ export default class LeaveAreaService extends BaseService<LeaveAreaDocument> {
     } else {
       update.studentStatus = COURSE_PERSON_STATUS_LEAVE;
     }
-    const course = await ctx.service.courseService.save(update, getId(leaveArea.person));
+    const course = await ctx.service.courseService.save(update, getId(leaveArea.course));
     let adverse;
     if (person.kind === TEACHER_DB_NAME) { // 给请假赋上 另一个对象
       adverse = course.student;
