@@ -17,8 +17,8 @@ export default class PushMsg extends Service {
     keyword2: string;
     remark: string;
   }) {
-    const { getToken } = this.ctx.service.wxTokenService;
-    const token = await getToken(person.kind === TEACHER_DB_NAME ? TEACHER_TYPE : STUDENT_TYPE);
+    const { wxTokenService } = this.ctx.service;
+    const token = await wxTokenService.getToken(person.kind === TEACHER_DB_NAME ? TEACHER_TYPE : STUDENT_TYPE);
     if (person.openid) {
       await axios.post(`https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${token}`, {
         touser: person.openid,

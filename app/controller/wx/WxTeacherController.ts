@@ -41,7 +41,7 @@ export default class WxTeacherController extends Controller {
    */
   async register() {
     const { ctx } = this;
-    const { Teacher } = ctx;
+    const { Teacher } = ctx.model;
     const { body } = ctx.request;
     body.status = PERSON_STATUS_READY; // 待审核
     body.openid = ctx.openid;

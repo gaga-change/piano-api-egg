@@ -8,7 +8,9 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1592204849000_5993';
 
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = [ 'wxOpenid' ];
+
+  config.wxOpenid = {};
 
   config.mongoose = {
     url: 'mongodb://192.168.2.173:30201,192.168.2.173:30202,192.168.2.173:30203/carry_test',
