@@ -1,13 +1,8 @@
 import * as assert from 'assert';
 import { app } from 'egg-mock/bootstrap';
-// import { Context } from 'egg';
 
 describe('test/app/controller/dict/classTimesController.test.ts', () => {
-  // let ctx: Context;
   const removeQueryArr: any = [];
-  // before(async () => {
-  //   app.mockSession({ user: {} });
-  // });
 
   it('should POST /api/classTimes 增', async () => {
     app.mockSession({ user: {} });
