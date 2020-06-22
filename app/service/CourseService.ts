@@ -53,14 +53,14 @@ export default class CourseService extends BaseService<CourseDocument> {
   }
 
   /**
-   * 获取当前周期内的 所有课程（学生或老师）
+   * 获取当前周期内的 所有未开始的课程（学生或老师）
    * @param teacher 教师id
    * @param student 学生id
    */
   public async coursesActivateArea(teacher?: string, student?: string) {
     const { ctx } = this;
     const { Course } = ctx.model;
-    return Course.findByActivateArea({ teacher, student });
+    return Course.findByActivateArea({ teacher, student }, { status: COURSE_STATUS_READY });
   }
 
   /**
