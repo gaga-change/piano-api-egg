@@ -4,7 +4,7 @@ import axios from 'axios';
 import { personToTeacherOrStudent } from '../../tools/person';
 import { COURSE_STATUS_READY } from '../../config/const';
 import { Controller } from 'egg';
-import { STUDENT_MENU, TEACHER_MENU } from '../../config/menu';
+import { getStudentMenu, getTeacherMenu } from '../../config/menu';
 import { getAppidAndsecret, STUDENT_TYPE, TEACHER_TYPE } from '../../tools/wxTools';
 
 export default class WxController extends Controller {
@@ -26,8 +26,8 @@ export default class WxController extends Controller {
     const { ctx } = this;
     const teacherToken = await ctx.service.wxTokenService.getToken(TEACHER_TYPE);
     const studentToken = await ctx.service.wxTokenService.getToken(STUDENT_TYPE);
-    const res1 = await axios.post(`https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${teacherToken}`, TEACHER_MENU);
-    const res2 = await axios.post(`https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${studentToken}`, STUDENT_MENU);
+    const res1 = await axios.post(`https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${teacherToken}`, getTeacherMenu());
+    const res2 = await axios.post(`https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${studentToken}`, getStudentMenu());
     ctx.body = {
       teacher: res1.data,
       student: res2.data,
