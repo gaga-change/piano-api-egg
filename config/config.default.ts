@@ -15,6 +15,7 @@ export default (appInfo: EggAppInfo) => {
   config.mongoose = {
     url: 'mongodb://192.168.2.173:30201,192.168.2.173:30202,192.168.2.173:30203/carry_test',
     options: {
+      useNewUrlParser: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
       useCreateIndex: true,
