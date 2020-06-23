@@ -97,6 +97,13 @@ export const STUDENT_MENU = {
           name: '请假',
           url: 'http://page.student.wx.carry.junn.top/leaveList',
         },
+        {
+          type: 'miniprogram',
+          name: 'carry商城',
+          url: 'http://mp.weixin.qq.com',
+          appid: 'wx88967eb0d53e3c3d',
+          pagepath: 'pages/shelf/shelf',
+        },
       ],
     },
   ],
