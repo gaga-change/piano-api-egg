@@ -22,6 +22,11 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
+  config.bodyParser = {
+    enableTypes: [ 'json', 'form', 'text' ],
+    extendTypes: { text: [ 'text/xml' ] },
+  };
+
   config.onerror = {
     all(err, ctx) {
       console.log('# error:', err);

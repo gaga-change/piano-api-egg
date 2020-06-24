@@ -1,4 +1,4 @@
-import convert from 'xml-js';
+import * as convert from 'xml-js';
 import code from '../../config/code';
 import axios from 'axios';
 import { personToTeacherOrStudent } from '../../tools/person';
@@ -103,12 +103,38 @@ export default class WxController extends Controller {
   async wxPostServer() {
     const { ctx } = this;
     const { Person, Share } = ctx.model;
+    console.log(ctx.request.body);
     const res: any = convert.xml2js(ctx.request.body, { compact: true });
     const event: string | undefined = res.xml.Event && res.xml.Event._cdata;
+    const content: string | undefined = res.xml.Content && res.xml.Content._cdata;
+    const toUserName: string | undefined = res.xml.ToUserName && res.xml.ToUserName._cdata;
+    const fromUserName: string = res.xml.FromUserName && res.xml.FromUserName._cdata;
     const msgType: string = res.xml.MsgType._cdata;
-    const fromUserName: string = res.xml.FromUserName._cdata;
     const ticket: string | undefined = res.xml.Ticket && res.xml.Ticket._cdata;
-    if (msgType === 'event' && event === 'subscribe' && ticket) { // 订阅事件
+    if (msgType === 'text' && content) {
+      console.log('### content:', content);
+      if (content.indexOf('空闲时段') > -1) {
+        console.log(content);
+        // eslint-disable-next-line no-return-assign
+        ctx.set('Content-Type', 'text/xml');
+        ctx.body = `
+      <xml>
+  <ToUserName><![CDATA[${fromUserName}]]></ToUserName>
+  <FromUserName><![CDATA[${toUserName}]]></FromUserName>
+  <CreateTime>${Date.now()}</CreateTime>
+  <MsgType><![CDATA[text]]></MsgType>
+  <Content><![CDATA[发送消息给公众号，消息内容为空闲时间段，当天有多个时间段则用空格分开，设置成功后会发消息给您，例如发送消息给公众号：
+周一 18:00-22:00
+周二 18:00-22:00 
+周三 18:00-22:00 
+周四 
+周五 18:05-22:10 
+周六 07:00-12:00 13:00-17:00 18:00-22:00
+周日 07:00-12:00 13:00-17:00 18:00-22:00]]></Content>
+</xml>`;
+        console.log(ctx.body);
+      }
+    } else if (msgType === 'event' && event === 'subscribe' && ticket) { // 订阅事件
       const person = await Person.findOne({ $or: [{ qrcodeTeacherTicket: ticket }, { qrcodeStudentTicket: ticket }] }); // 分享的人
       if (person && person.openid !== fromUserName) { // 确定分享的人还在 并且不是本人
         const exist = await Share.findOne({ shareOpenid: person.openid, subscribeOpenid: fromUserName });
@@ -123,6 +149,8 @@ export default class WxController extends Controller {
     } else if (msgType === 'event' && event === 'unsubscribe') { // 取消订阅
       await Share.deleteMany({ subscribeOpenid: fromUserName }); // 删除原有分享关系
     }
-    ctx.body = '';
+    if (!ctx.body) {
+      ctx.body = '';
+    }
   }
 }

@@ -32,6 +32,7 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
+    "@types/xml-js": "^1.0.0",
     "@types/axios": "^0.14.0",
     "@types/lodash": "^4.14.155",
     "@types/mocha": "^2.2.40",
