@@ -13,7 +13,7 @@ export default (appInfo: EggAppInfo) => {
   config.wxOpenid = {};
 
   config.mongoose = {
-    url: 'mongodb://192.168.2.173:30201,192.168.2.173:30202,192.168.2.173:30203/carry_test',
+    url: process.env.MONGO_LINK || 'mongodb://192.168.2.173:30201,192.168.2.173:30202,192.168.2.173:30203/carry_test',
     options: {
       useNewUrlParser: true,
       useFindAndModify: false,
