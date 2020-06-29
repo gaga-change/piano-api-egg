@@ -78,11 +78,11 @@ export default class SpaceRuleService extends BaseService<SpaceRuleDocument> {
     }
   }
 
-  public async getSelfSpaceAreaInSpaceRule(query: any) {
+  public async getSelfSpaceAreaInSpaceRule(date: string, personId: string) {
     const { ctx } = this;
     const { SpaceRule, Person, Course } = ctx.model;
-    const oneDay: Date = new Date(query.date);
-    const person = await Person.findById(query.person);
+    const oneDay: Date = new Date(date);
+    const person = await Person.findById(personId);
     if (!person) throw new ThrowError('人物已被删除');
     // 查询时间有交集的规则
     // 1. 查询个人规则

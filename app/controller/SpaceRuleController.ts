@@ -33,8 +33,9 @@ export default class SpaceRuleController extends BaseController<SpaceRuleDocumen
   async getSelfSpaceAreaInSpaceRule() {
     const { ctx } = this;
     const query = ctx.query;
-    ctx.assert(query.date, 400, 'date 必传');
-    ctx.body = await ctx.service.spaceRuleService.getSelfSpaceAreaInSpaceRule(query);
+    const { date, person } = query;
+    ctx.assert(date && person, 400, 'date&person 参数必传');
+    ctx.body = await ctx.service.spaceRuleService.getSelfSpaceAreaInSpaceRule(date, person);
   }
 
   /**
