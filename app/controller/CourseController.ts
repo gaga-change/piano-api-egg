@@ -1,8 +1,6 @@
-
-
-import code from '../config/code';
 import BaseController from '../code/BaseController';
 import { CourseDocument } from '../model/Course';
+import code from '../config/code';
 
 export default class CourseController extends BaseController<CourseDocument> {
 
@@ -61,10 +59,10 @@ export default class CourseController extends BaseController<CourseDocument> {
    */
   async create() {
     const { ctx } = this;
-    const { Course } = ctx.model;
+    // const { Course } = ctx.model;
     const body = ctx.request.body;
     // 字段校验
-    await new Course(body).validate();
+    // await new Course(body).validate();
     ctx.body = await ctx.service.courseService.save(body);
   }
 
