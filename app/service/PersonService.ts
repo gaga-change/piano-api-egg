@@ -1,6 +1,6 @@
-import { pageable } from '../tools/pageable';
-import { PersonDocument } from '../model/Person';
 import BaseService from '../code/BaseService';
+import { PersonDocument } from '../model/Person';
+import { pageable } from '../tools/pageable';
 
 export default class PersonService extends BaseService<PersonDocument> {
 
@@ -19,8 +19,8 @@ export default class PersonService extends BaseService<PersonDocument> {
     const { skip, limit, params } = pageable(query, Person, { fuzzy: false });
     if (params.name) {
       params.$or = [{ name: new RegExp(params.name, 'i') }, { phone: new RegExp(params.name) }];
-      delete params.name;
     }
+    delete params.name;
     const res1 = Person.find(params)
       .sort(sort)
       .limit(limit)
